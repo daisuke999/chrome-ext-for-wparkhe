@@ -1,0 +1,148 @@
+/* *************************************************************
+ * style.css
+** *************************************************************/
+:root {
+  --arkpExt-color-border: #ddd;
+}
+.arkpExt_container {
+  position: relative;
+  background-color: #ddd;
+  box-shadow: 0 0 0 4px #ddd;
+  border-radius: 2px;
+}
+.arkpExt_panel {
+  position: absolute;
+  display: flex;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  box-shadow: 0 0 0 4px #000, 0 12px 48px -20px #00000080;
+  border-radius: 2px;
+  overflow: hidden;
+}
+.arkpExt_panel_mediaGrp {
+  flex-basis: 100%;
+  max-height: 350px;
+  overflow: scroll;
+}
+.arkpExt_panel_mediaGrp:not(:first-child) {
+  border-left: 4px solid #000;
+}
+.arkpExt_panel_mediaGrp:has(.arkpExt_panel_mediaName.is_active) {
+  /* 選択中のメディアグループ */
+  background-color: rgb(255, 255, 0, .5);
+}
+.arkpExt_panel_mediaName {
+  position: sticky;
+  top: 0;
+  left: 0;
+  background: #ddd;
+  font-weight: bold;
+  padding: .25rem 1rem;
+  cursor: pointer;
+  z-index: 1;
+}
+.arkpExt_panel_mediaName[data-device=""] {
+  background-color: #000;
+  color: #fff;
+}
+.arkpExt_panel_mediaName.is_active {
+  background-color: #1e8ff3;
+  color: #fff;
+}
+.arkpExt_panel_selectorName {
+  background: #eee;
+  font-weight: bold;
+  padding: .25rem 1rem;
+}
+.arkpExt_panel_selectorBody {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background-color: #fff;
+}
+.arkpExt_panel_propGrp {
+  display: flex;
+  gap: 1rem;
+  background-color: #fff;
+}
+.arkpExt_panel_propName {
+  display: flex;
+  align-items: center;
+  flex-basis: 100%;
+  padding: 0 1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.arkpExt_panel_propVal {
+  flex-basis: 100%;
+}
+.arkpExt_panel_inputGrp {
+  position: relative;
+  display: flex;
+  background-color: #fafafa;
+}
+.arkpExt_panel_input {
+  background-color: #fafafa;
+  border: none;
+  min-height: 38px;
+}
+.arkpExt_panel_input[type="text"] {
+  width: 100%;
+}
+.arkpExt_panel_input[type="color"] {
+  width: 64px;
+}
+.arkpExt_panel_ctrl {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: stretch;
+}
+.arkpExt_panel_ctrlBtn {
+  position: relative;
+  flex-grow: 1;
+  background-color: #eee;
+  border: none;
+  width: 32px;
+  margin-right: 1px;
+  cursor: pointer;
+}
+.arkpExt_panel_ctrlBtn:hover {
+  background-color: #ccc;
+}
+.arkpExt_panel_ctrlBtn.-inc {
+  margin-top: 1px;
+  border-bottom: 1px solid #ddd;
+}
+.arkpExt_panel_ctrlBtn.-dec {
+  margin-bottom: 1px;
+}
+.arkpExt_panel_ctrlBtn::after {
+  position: absolute;
+  display: block;
+  content: "";
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: calc(10px / 2);
+  background-color: #ccc;
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  translate: -50% -50%;
+}
+.arkpExt_panel_ctrlBtn.-dec::after {
+  clip-path: polygon(50% 100%, 0 0, 100% 0);
+}
+.arkpExt_panel_ctrlBtn:hover::after  {
+  background-color: #777;
+}
+
+/* for popup */
+#arkpExt_popup {
+  width: 250px;
+}
