@@ -12,13 +12,10 @@ export const addClickEventToDeviceSwitchBtn = (SETTINGS) => {
   const deviceSwitchBtns = document.getElementsByClassName(DEVICE_SWITCH_CLASS_NAME);
   for (const btn of deviceSwitchBtns) {
     btn.addEventListener("click", () => {
-      console.log("click!");
       const deviceVal = btn.dataset.device;
       if (deviceVal) {
-        console.log(deviceVal);
         const panelMediaNameElms = document.getElementsByClassName(`${APP_PREFIX}_panel_mediaName`);
         for (const nameElm of panelMediaNameElms) {
-          console.log(nameElm.dataset.device);
           if (nameElm.dataset.device === deviceVal) {
             // clickイベント発火
             nameElm.dispatchEvent(new Event("click"));
@@ -39,7 +36,6 @@ export const initMediaNameisActive = (SETTINGS) => {
   
   const deviceSwitchBtns = document.getElementsByClassName(DEVICE_SWITCH_CLASS_NAME);
   for (const btn of deviceSwitchBtns) {
-    console.log(btn);
     if (btn.classList.contains("-active")) {
       const deviceVal = btn.dataset.device;
       if (deviceVal) {

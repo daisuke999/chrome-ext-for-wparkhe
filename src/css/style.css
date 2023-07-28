@@ -4,6 +4,8 @@
 :root {
   --arkpExt-color-border: #ddd;
 }
+
+/* for app */
 .arkpExt_container {
   position: relative;
   background-color: #ddd;
@@ -18,8 +20,12 @@
   right: 0;
   background-color: #fff;
   box-shadow: 0 0 0 4px #000, 0 12px 48px -20px #00000080;
-  border-radius: 2px;
-  overflow: hidden;
+  border-radius: 2px 0 2px 2px;
+}
+.arkpExt_panel:has(.arkpExt_panel_openCloseBtn.-close) {
+  /* 開閉ボタンが-closeのとき */
+  height: 0;
+  box-shadow: none;
 }
 .arkpExt_panel_mediaGrp {
   flex-basis: 100%;
@@ -140,6 +146,41 @@
 }
 .arkpExt_panel_ctrlBtn:hover::after  {
   background-color: #777;
+}
+.arkpExt_panel_openCloseBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #000;
+  border: none;
+  color: #ccc;
+  font-size: .75rem;
+  font-weight: bold;
+  width: 80px;
+  padding: .25rem 1rem;
+  border-radius: 4px 4px 0 0;
+  transform: translateX(4px) translateY(calc(-100% + -2px));
+}
+.arkpExt_panel_openCloseBtn.-close {
+  border-radius: 6px;
+  top: -6px;
+  right: 6px;
+  transform: translateY(-100%);
+}
+.arkpExt_panel_openCloseBtn::before {
+  display: inline;
+  content: "CLOSE";
+}
+.arkpExt_panel_openCloseBtn.-close::before {
+  content: "OPEN";
+}
+.arkpExt_panel_nodata {
+  width: 100%;
+  background-color: #eee;
+  padding: 1rem;
+}
+.arkpExt_panel:has(.arkpExt_panel_openCloseBtn.-close) .arkpExt_panel_nodata {
+  display: none;
 }
 
 /* for popup */

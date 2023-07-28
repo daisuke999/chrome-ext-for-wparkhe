@@ -2,7 +2,7 @@
 // panel.js
 // 
 import { isColorVal, isNumVal, getDatasetDeviceVal } from '../js/utility.js'
-import { consoleLogDebug } from '../js/debug.js'
+import { consoleLogDebug, consoleLogProcess } from '../js/debug.js'
  
 
 // 
@@ -26,10 +26,21 @@ export const outputStyleInformation = (results, SETTINGS) => {
       resultsMap.get(media).push(selector);
     }
   }
-  consoleLogDebug(resultsMap);
-  // メディアクエリ、セレクタ毎に結果を出力
+  consoleLogDebug(resultsMap, "get: media and selectors");
+
+  // パネル要素生成
   const panelElm = document.createElement("div");
   panelElm.className = `${APP_PREFIX}_panel`;
+
+  // 対象データが存在しない（resultsMapのサイズが0）の場合
+  if (resultsMap.size === 0) {
+    const nodataParElm = document.createElement("p");
+    nodataParElm.className = `${APP_PREFIX}_panel_nodata`;
+    nodataParElm.textContent = "Target selector and property do not exist";
+    panelElm.appendChild(nodataParElm);
+  }
+
+  // メディアクエリ、セレクタ毎に結果を出力
   for (const [media, selectorArr] of resultsMap.entries()) {
     const mediaGrpElm = document.createElement("div");
     mediaGrpElm.className = `${APP_PREFIX}_panel_mediaGrp`;
@@ -102,6 +113,7 @@ export const outputStyleInformation = (results, SETTINGS) => {
   iframeWrapperElm.before(iframeContainerElm); // iframeの直前にiframeContainerElmを一旦配置した後に...
   iframeContainerElm.prepend(iframeWrapperElm); // iframeContainerElm > iframeWrapper のようにする
   iframeContainerElm.appendChild(panelElm); // その後、iframeContainerElm > iframeWrapperElm, panelElm とする
+  consoleLogProcess("done: create setting panel");
 }
 
 
@@ -172,7 +184,7 @@ const updateInputVal = (inputId, step) => {
 // 
 export const addEventInputVal = (results, SETTINGS) => {
 
-  const { APP_PREFIX } = SETTINGS;
+  const { APP_PREFIX, IFRAME_ELM_SELECTOR, TARGET_INLINE_STYLE_ELM_ID } = SETTINGS;
 
   let timeoutId; // タイムアウトID
 
@@ -182,11 +194,9 @@ export const addEventInputVal = (results, SETTINGS) => {
   };
 
   const inputs = document.querySelectorAll(`.${APP_PREFIX}_panel input`);
-  consoleLogDebug(inputs);
 
   inputs.forEach((input, index) => {
     input.addEventListener('input', () => {
-      consoleLogDebug("update!");
 
       debounce(() => {
         const { media, selector, property } = results[index];
@@ -222,4 +232,23 @@ export const addEventInputVal = (results, SETTINGS) => {
       }, 100); // 0.100秒のディレイを設定
     });
   });
+  consoleLogProcess("done: add update event");
 };
+
+// 
+// 
+// 
+export const addPanelOpenCloseBtn = (SETTINGS) => {
+
+  const { APP_PREFIX } = SETTINGS;
+
+  // 開閉ボタン生成
+  const btn = document.createElement("button");
+  btn.className = `${APP_PREFIX}_panel_openCloseBtn`;
+  btn.addEventListener("click", (e) => {
+    btn.classList.toggle("-close");
+  });
+  // パネル要素へ追加
+  const panel_elm = document.getElementsByClassName(`${APP_PREFIX}_panel`)[0];
+  panel_elm.appendChild(btn);
+}

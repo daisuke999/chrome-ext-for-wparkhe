@@ -4,7 +4,7 @@
 import MANIFEST_JSON from './manifest.json'
 import SETTING_JSON from './src/json/setting.json'
 import { extractStyleInfoFromIframe } from './src/js/iframe.js'
-import { outputStyleInformation, addEventInputVal } from './src/js/panel.js'
+import { outputStyleInformation, addEventInputVal, addPanelOpenCloseBtn } from './src/js/panel.js'
 import { addClickEventToDeviceSwitchBtn, initMediaNameisActive } from './src/js/device_switch.js'
 import { consoleLogAppInfo, consoleLogProcess } from './src/js/debug.js'
 import './src/css/style.css'
@@ -51,11 +51,12 @@ const main = async () => {
     // 
     outputStyleInformation(results, SETTINGS);                                  // 取得したスタイル情報を元に操作パネルを生成
     addEventInputVal(results, SETTINGS);                                        // 操作パネルのinput要素に値更新時のイベントを設定
+    addPanelOpenCloseBtn(SETTINGS);                                             // 操作パネルの開閉ボタンと機能を追加
     // 
     // デバイススイッチ処理
     // 
-    addClickEventToDeviceSwitchBtn(DEVICE_SWITCH_ELM_CLASS_NAME, APP_PREFIX);   // イベント：デバイススイッチボタンクリック時 を追加
-    initMediaNameisActive(DEVICE_SWITCH_ELM_CLASS_NAME, APP_PREFIX);            // 初回のみ：デバイススイッチの選択状況に合わせてmediaNameにis_activeを付与
+    addClickEventToDeviceSwitchBtn(SETTINGS);                                   // イベント：デバイススイッチボタンクリック時 を追加
+    initMediaNameisActive(SETTINGS);                                            // 初回のみ：デバイススイッチの選択状況に合わせてmediaNameにis_activeを付与
     // 
     // 処理成功
     // 

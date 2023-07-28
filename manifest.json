@@ -1,11 +1,17 @@
 {
   "manifest_version": 3,
-  "name": "Live Simulator for WP Arkhe",
+  "name": "Live Editor for WP Arkhe",
   "version": "0.0.1",
   "description": "WordPressテーマ「Arkhe」用の拡張機能",
   "action": { "default_popup": "index.html" },
+  "icons": {
+    "16": "src/img/icon_16.png",
+    "32": "src/img/icon_32.png",
+    "48": "src/img/icon_48.png",
+    "128": "src/img/icon_128.png"
+  },
   "content_scripts": [{
-    "matches": ["https://patterns.arkhe-theme.com/*"],
+    "matches": [ "https://patterns.arkhe-theme.com/*" ],
     "js": [ "main.js" ]
   }]
 }

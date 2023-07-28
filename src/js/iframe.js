@@ -1,7 +1,7 @@
 // 
 // iframe.js
 // 
-import { consoleLogProcess } from '../js/debug.js';
+import { consoleLogDebug, consoleLogProcess } from '../js/debug.js';
 
 // 
 // extractStyleInfoFromIframe
@@ -36,6 +36,7 @@ export const extractStyleInfoFromIframe = async (SETTINGS) => {
           results.push(...mediaResults);
         }
       }
+      consoleLogDebug(results, "get: styles");
       return results;
     }
 
@@ -52,17 +53,17 @@ export const extractStyleInfoFromIframe = async (SETTINGS) => {
       consoleLogProcess("iframe loaded");
       init();
     } else {
-      consoleLogProcess("iframe waiting...");
+      consoleLogProcess("no target iframe");
 
-      iframe.onload = () => {
-        consoleLogProcess("iframe onload");
-        init();
-      };
+      // iframe.onload = () => {
+      //   consoleLogProcess("iframe onload");
+      //   init();
+      // };
   
-      iframe.onerror = () => {
-        consoleLogProcess("iframe error!");
-        reject(new Error('Failed to load iframe'));
-      };
+      // iframe.onerror = () => {
+      //   consoleLogProcess("iframe error!");
+      //   reject(new Error('Failed to load iframe'));
+      // };
     }
   });
 };
