@@ -3,6 +3,7 @@
 // 
 import MANIFEST_JSON from './manifest.json'
 import SETTING_JSON from './src/json/setting.json'
+import { checkCurrentPage } from './src/js/app.js'
 import { extractStyleInfoFromIframe } from './src/js/iframe.js'
 import { outputStyleInformation, addEventInputVal, addPanelOpenCloseBtn } from './src/js/panel.js'
 import { addClickEventToDeviceSwitchBtn, initMediaNameisActive } from './src/js/device_switch.js'
@@ -18,8 +19,10 @@ const IFRAME_ELM_SELECTOR = SETTING_JSON.arkp_site.iframe_elm_selector || ".arkp
 const IFRAME_WRAPPER_ELM_ID = SETTING_JSON.arkp_site.iframe_wrapper_elm_id || "arkp-iframe";                        // iframeを包んでいる外側の要素のセレクタ名
 const TARGET_INLINE_STYLE_ELM_ID = SETTING_JSON.ark_theme.inline_style_elm_id || "arkb-dynamic-styles";             // style（インライン）が定義されている要素のID
 const DEVICE_SWITCH_ELM_CLASS_NAME = SETTING_JSON.arkp_site.device_switch_class_name || "arkp-deviceSwitch__btn";   // 配布サイトのデバイス切り替えスイッチ要素のclass
+const PAGE_TITLE_ELM_SELECTOR = SETTING_JSON.arkp_site.page_title_elm_selector || ".c-pageTitle__main";             // 配布サイトのページタイトル要素のセレクタ名
 const TARGET_SELECTOR = SETTING_JSON.target_selector || ".arkp-";                                                   // 対象セレクタ
 const TARGET_PREFIX = SETTING_JSON.target_prefix || "--";                                                           // 対象接頭辞
+const TARGET_PATTERN_GRP = SETTING_JSON.target_pattern_grp || ["gn", "sc"];                                         // 対象パターングループ
 
 // 上記をオブジェクトへ
 const SETTINGS = {
@@ -28,8 +31,10 @@ const SETTINGS = {
   IFRAME_WRAPPER_ELM_ID,
   TARGET_INLINE_STYLE_ELM_ID,
   DEVICE_SWITCH_ELM_CLASS_NAME,
+  PAGE_TITLE_ELM_SELECTOR,
   TARGET_SELECTOR,
   TARGET_PREFIX,
+  TARGET_PATTERN_GRP,
 };
 
 
@@ -42,6 +47,13 @@ const main = async () => {
     // アプリ情報 コンソール出力
     // 
     consoleLogAppInfo(MANIFEST_JSON);
+    // 
+    // 動作対象チェック
+    // 
+    const check = checkCurrentPage(SETTINGS);                                   // 対象ページ以外なら以降スキップ
+    if (!check) {
+      return;
+    }
     // 
     // スタイル情報取得
     // 

@@ -2,6 +2,7 @@
   "app_prefix": "arkpExt",
   "target_selector": ".arkp-",
   "target_prefix": "--arkp",
+  "target_pattern_grp": ["gn", "sc"],
 
   "ark_theme": {
     "inline_style_elm_id": "arkb-dynamic-styles"
@@ -10,6 +11,7 @@
   "arkp_site": { 
     "iframe_elm_selector": ".arkp-iframeWrapper__iframe",
     "iframe_wrapper_elm_id": "arkp-iframe",
-    "device_switch_class_name": "arkp-deviceSwitch__btn"
+    "device_switch_class_name": "arkp-deviceSwitch__btn",
+    "page_title_elm_selector": ".p-entry__head .c-pageTitle__main"
   }
 }
