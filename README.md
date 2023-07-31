@@ -2,7 +2,8 @@
 
 WordPressテーマ「Arkhe」用のサードパーティ製のChrome拡張です。
 
-[demo - YouTube](https://youtu.be/FlHFBFl3POs)
++ [Eddy - Arkhe Pattern Library Extention - Chrome ウェブストア](https://chrome.google.com/webstore/detail/eddy-arkhe-pattern-librar/nmnlkadnlpbibimjfjkkjdkimkmaalck/related?hl=ja&authuser=0)
++ [demo - YouTube](https://youtu.be/FlHFBFl3POs)
 
 ## 機能
 
