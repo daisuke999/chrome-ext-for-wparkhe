@@ -2,6 +2,8 @@
 
 WordPressテーマ「Arkhe」用のサードパーティ製のChrome拡張です。
 
+[demo - YouTube](https://youtu.be/FlHFBFl3POs)
+
 ## 機能
 
 + Arkhe公式のブロックパターン配布サイト「Arkheパターンライブラリ」で配布されているブロックパターンに組み込まれているCSS変数をサイト内で調整してデザインの変更を試すことができるようになります。
